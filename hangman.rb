@@ -1,10 +1,6 @@
-#Notes
-#  We can split a string into an array using:
-#    arrayname = stringname.split("")
-
 
 class Hangman
-	LIST = ["canada", "england", "australia", "japan"]
+	LIST = ["australia"]
   attr_accessor :word, :chances, :board, :list, :guesses, :answer
 
   def initialize()
@@ -15,14 +11,12 @@ class Hangman
   end
   
   # return @guesses as a string
-  # ! Completed
   def guesses
   	return @guesses.join(", ")
 
   end
   
   # return a string of underscores equal to length of the given word
-  # ! COMPLETED
   def setup_board(word)
   		boardstring = ""
   		@word.length.times do 
@@ -32,7 +26,6 @@ class Hangman
 	end
 
   # return true if word has letter
-  # ! COMPLETED (Drew, overview this)
   def word_has?(letter)
   	@word.index(letter) == nil ? false : true
   end
@@ -52,7 +45,6 @@ class Hangman
   end
 
   # decrement # of chances and add letter to guesses
-  # ! Completed
   def wrong_letter(letter)
   	@chances -= 1
   	@guesses << letter
@@ -60,14 +52,16 @@ class Hangman
   
   # if the word has the given letter, put it on the board, otherwise, it's a wrong guess
   # ! Completed? But what about the case where the wrong letter has already been guessed.
-  # ! shouldn't we puts a message like "Try again! You've already guessed that letter."
+
   def guess(letter)
-    if word_has?(letter)
-    	put_letter_on_board(letter)
-    elsif !@guesses.include? letter
-      wrong_letter(letter) # if !@guesses.include? letter
-    else
+    if @board.include? letter
       puts "You've already guessed that letter! Try again!\n"
+    elsif word_has?(letter)
+    	put_letter_on_board(letter)
+    elsif @guesses.include? letter
+      puts "You've already guessed that letter! Try again!\n"
+    else
+      wrong_letter(letter) 
     end
   end
 
