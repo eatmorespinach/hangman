@@ -1,7 +1,8 @@
 
+
 class Hangman
-	LIST = ["australia"]
-  attr_accessor :word, :chances, :board, :list, :guesses, :answer
+	LIST = ["dog"]
+  attr_accessor :word, :chances, :board, :list, :guesses
 
   def initialize()
     @chances = 8
@@ -13,7 +14,6 @@ class Hangman
   # return @guesses as a string
   def guesses
   	return @guesses.join(", ")
-
   end
   
   # return a string of underscores equal to length of the given word
@@ -22,7 +22,7 @@ class Hangman
   		@word.length.times do 
 				boardstring << "_"
 			end
-			return boardstring.split("") # store the letters in board as an array
+		return boardstring.split("") # store the letters in board as an array
 	end
 
   # return true if word has letter
@@ -34,7 +34,7 @@ class Hangman
   # in other words, if @board is _ _ _ _ _ _ and @word is canada
   # and the letter guessed is a
   # then @board should become _ a _ a _ a
-  # ! COMPLETED 
+
   def put_letter_on_board(letter)
     word_array = @word.split("")
     word_array.each_with_index do |element, index|
@@ -54,19 +54,25 @@ class Hangman
   # ! Completed? But what about the case where the wrong letter has already been guessed.
 
   def guess(letter)
-    if @board.include? letter
+    if @board.include?(letter)
       puts "You've already guessed that letter! Try again!\n"
+
+    elsif letter.kind_of?(Fixnum)
+      puts "Please enter a valid letter" 
+      guess(letter)
+      
+      #trying to get it to display error is a number is typed
+
     elsif word_has?(letter)
     	put_letter_on_board(letter)
     elsif @guesses.include? letter
       puts "You've already guessed that letter! Try again!\n"
-    else
-      wrong_letter(letter) 
+    else wrong_letter(letter) 
     end
   end
 
   # return true if @board doesn't have a '_', otherwise return false
-  # ! COMPLETED
+
   def win?
     found_count = 0
     @board.each do |letter|
@@ -78,7 +84,7 @@ class Hangman
   end
 
   # return true if @chances is 0, otherwise return false
-  # ! COMPLETED
+
   def lost?
       @chances == 0 # using a ternary operator to return true/false
   end

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Hang Man</title>
+     
+  </head>
+  
+  <body>
+  
+   	<h1>Welcome to Hangman</h1>
+   	<h2>Please guess a letter between a-z</h2>
+
+    <ul>
+    	<li>Place letter here: <input type="text" id="button">
+    	</li>
+  		<button id="button">Enter guess!</button>
+    </ul>
+    
+    <div id = "board">
+    </div>
+
+
+  <script>
+
+    var letterArray = ['f','i','s','h']
+    var board = document.getElementById("board");
+    var button = document.getElementById("button");
+    var newboard = board.innerHTML = ("_ _ _ _");
+    var guessesLeft = 10;
+
+
+
+  function guessedLetter(guess){
+
+  	for(i = 0; i < letterArray.length; i += 1)
+  		if (guess = letterArray[i]){
+  			console.log('yay good job!')
+        break;}
+      else {
+        console.log('WRONG');
+    		}
+
+    }	
+
+  button.addEventListener('click', guessedLetter);
+// yay good job is putsing upon curser in search. fix it!  
+// when a letter is guessed, we must iterate through each character
+// of letterArray[i]. If a guess = a letter, substitue board[i] with that letter. 
+  
+  
+
+
+
+
+  function win() {
+
+  }
+
+  </script>
+
+ </body>
+</html>
+
+
+
+
+
+
