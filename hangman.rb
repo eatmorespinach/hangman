@@ -2,7 +2,6 @@
 
 class Hangman
 
-
   def initialize
     words_array = ["bulls", "ted"]
     @word = words_array.sample        # is this the best place to put our picked word,
@@ -14,7 +13,7 @@ class Hangman
     @word.length.times do |i|
       @game_board << "_"
 
-    @turns_left = 11
+    @turns_left = 10
     end
   end
     
@@ -57,13 +56,14 @@ p "Welcome to hangman! Enter a letter guess:"
     game.game_board
     game.guess(gets.chomp)
     if game.instance_variable_get(:@game_board) == game.instance_variable_get(:@word_array)
-      puts "you winnn"
+      puts
+      puts "You Win! the word was #{game.instance_variable_get(:@word)}"
       game.game_board
       break
     elsif game.instance_variable_get(:@turns_left) == 0
       puts "you loooose"
       break
-      #ask ben if question
+      #ask ben if question, and why break is invalide in winner method
     else
     end
   end
