@@ -1,15 +1,12 @@
-
 # require 'pry'
 
 class Hangman
 
-  attr_accessor :turns_left
 
   def initialize
     words_array = ["bulls", "ted"]
     @word = words_array.sample        # is this the best place to put our picked word,
                                     # or should it be in a method?
-    
     @word_array = @word.split(//)
 
     @game_board = []
@@ -51,15 +48,27 @@ class Hangman
 end
 
 game = Hangman.new
-game.turns_left
+
 puts 
+
 p "Welcome to hangman! Enter a letter guess:"
 
-
-  until game.instance_variable_get(:@turns_left) > 0 || game.winner?
+  while true
     game.game_board
     game.guess(gets.chomp)
-    
+    if game.instance_variable_get(:@game_board) == game.instance_variable_get(:@word_array)
+      puts "you winnn"
+      game.game_board
+      break
+    elsif game.instance_variable_get(:@turns_left) == 0
+      puts "you loooose"
+      break
+      #ask ben if question
+    else
+    end
+  end
+
+  
     #get this to end when either turns_left expires or a game.winner is found?
     
-  end
+  
