@@ -86,6 +86,7 @@ p "Welcome to hangman! Enter a letter guess:"
   #1 - Breaking out of winner method. 
   #2 - Confirm usefullness of attr_accessor
   #3 - Important refactoring for clean code
+  #4 - Would you recommended I use self. anywhere?
 
 
 
