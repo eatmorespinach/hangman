@@ -27,6 +27,10 @@ class Hangman
     @board
   end
 
+  def decrement_turn
+    @turns_left -= 1
+  end
+
   def win?
     !@board.include?("_")
   end       
@@ -37,31 +41,31 @@ end
 
 class Runner
   def self.run
-    @game = Hangman.new
+    game = Hangman.new
     puts "\nWelcome to hangman! Enter a letter guess:"
 
-    while @game.turns_left > 0
-      print @game.board
+    while game.turns_left > 0
+      print game.board
       letter = gets.chomp
 
-      if @game.word.include?(letter)
-        @game.place_letter_on_board(letter)
+      if game.word.include?(letter)
+        game.place_letter_on_board(letter)
       else
-        @game.decrement_turn
+        game.decrement_turn
       end
-      if @game.win?
+      if game.win?
         puts
-        puts "YOU WIN! The word was #{@game.word}"
+        puts "YOU WIN! The word was #{game.word}"
         puts
-        print @game.board
+        print game.board
         puts
         return false
       end
       puts
-      puts "turns left: #{@game.turns_left}"
+      puts "turns left: #{game.turns_left}"
       puts
     end
-    puts "You lose. The word was #{@game.word}"
+    puts "You lose. The word was #{game.word}"
   end
 end
 
