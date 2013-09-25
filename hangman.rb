@@ -2,59 +2,35 @@
 
 class Hangman
 
-  attr_accessor :game_board, :word_array
+  WORDS = ["bulls", "ted"]
+
+  attr_accessor :board, :word, :turns_left
 
   def initialize
-    words = ["bulls", "ted"]
-    @word = words.sample        # is this the best place to put our picked word,
-                                # or should it be in a method?    
+    @word = WORDS.sample
     @turns_left = 10
+    @board = draw_board
   end
-    
-  def initial_board
-    @game_board = []
-    
-    @word.length.times do |i|
-      @game_board << "_"
+
+  def draw_board
+    board = []
+    @word.length.times do
+      board << "_"
     end
-    puts
-    print @game_board
-    puts
+    board
   end
 
-  def show_board
-    print @game_board
-    puts
-  end
-
-  def guess(letter)
-    @word_array = @word.split(//)
-    if @word_array.include?(letter)
-      @word_array.each_with_index {|let,index|
-        if @word_array[index] == letter
-          @game_board[index] = letter
-        end
-        }
-    else 
-      @turns_left -= 1
+  def place_letter_on_board(letter)
+    @word.split(//).each_with_index do |let,index|
+      @board[index] = letter if @word[index] == letter
     end
+    @board
   end
 
-  def display_turns
-    puts 
-    puts "turns left #{@turns_left}"
-    puts
-    puts
-  end
+  def win?
+    !@board.include?("_")
+  end       
 
-  def winner
-    if @game_board == @word_array
-      puts "YOU WIN!"
-    elsif @turns_left == 0
-      puts "Sorry, you lose. the word was #{@word}"
-
-    end
-  end
 end
 
 
@@ -62,17 +38,30 @@ end
 class Runner
   def self.run
     @game = Hangman.new
-    puts 
-    p "Welcome to hangman! Enter a letter guess:"
+    puts "\nWelcome to hangman! Enter a letter guess:"
 
-    @game.initial_board
+    while @game.turns_left > 0
+      print @game.board
+      letter = gets.chomp
 
-    while true
-      @game.guess(gets.chomp)
-      @game.display_turns
-      @game.show_board
-      @game.winner
+      if @game.word.include?(letter)
+        @game.place_letter_on_board(letter)
+      else
+        @game.decrement_turn
+      end
+      if @game.win?
+        puts
+        puts "YOU WIN! The word was #{@game.word}"
+        puts
+        print @game.board
+        puts
+        return false
+      end
+      puts
+      puts "turns left: #{@game.turns_left}"
+      puts
     end
+    puts "You lose. The word was #{@game.word}"
   end
 end
 
@@ -88,7 +77,10 @@ Runner.run
 
 
 
+# SKYPW WITH ALEX
 
+# move all view actions into runner. 
+# take logic out of initialize when refactoring
 
 
     #game.instance_variable_get(:@game_board) == game.instance_variable_get(:@word_array)
