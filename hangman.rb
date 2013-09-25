@@ -66,33 +66,3 @@ class Runner
 end
 
 Runner.run
-
-  
-  #QUESTIONS 
-  #1 - Breaking out of winner method. 
-  #2 - Confirm usefullness of attr_accessor
-  #3 - Important refactoring for clean code
-  #4 - Would you recommended I use self. anywhere?
-
-
-
-
-# SKYPW WITH ALEX
-
-# move all view actions into runner. 
-# take logic out of initialize when refactoring
-
-
-    #game.instance_variable_get(:@game_board) == game.instance_variable_get(:@word_array)
-      # puts 
-      # puts "You Win! the word was #{game.instance_variable_get(:@word)}"
-      # game.display_board
-      # break
-    # elsif game.instance_variable_get(:@turns_left) == 0
-      # puts "you loooose"
-      # break
-      # #ask ben if question, and why break is invalide in winner method
-    # else
-    # end
-    
-  
